@@ -1,41 +1,56 @@
-#include <stdio.h>
-int main()
-{
-    char str[100];
-    int i, start, len;
-    printf("Enter a string: ");
-    scanf("%s", str);
-    printf("Enter starting position: ");
-    scanf("%d", &start);
-    printf("Enter length: ");
-    scanf("%d", &len);
-    printf("Substring: ");
-    for(i = start; i < start + len; i++)
-    {
-        printf("%c", str[i]);
-    }
-    return 0;
-}
+#include<stdio.h>
+#include<string.h>
 
-#include <stdio.h>
 int main()
 {
     char str[100];
-    int i, len = 0;
-    printf("Enter string: ");
-    scanf("%s", str);
-    while(str[len] != '\0')
+    int choice,start,len,i,n;
+
+    printf("1.Substring\n");
+    printf("2.Palindrome\n");
+    printf("Enter your choice: ");
+    scanf("%d",&choice);
+
+    printf("Enter a string: ");
+    scanf("%99s",str);
+
+    n=strlen(str);
+
+    switch(choice)
     {
-        len++;
+        case 1:
+            printf("Enter starting position: ");
+            scanf("%d",&start);
+            printf("Enter length: ");
+            scanf("%d",&len);
+
+            if(start<0||len<0||start>=n||start+len>n)
+            {
+                printf("Invalid position or length");
+                return 1;
+            }
+
+            printf("Substring: ");
+            for(i=start;i<start+len;i++)
+                printf("%c",str[i]);
+            printf("\n");
+            break;
+
+        case 2:
+            for(i=0;i<n/2;i++)
+            {
+                if(str[i]!=str[n-1-i])
+                {
+                    printf("Not Palindrome\n");
+                    return 0;
+                }
+            }
+            printf("Palindrome\n");
+            break;
+
+        default:
+            printf("Invalid choice!\n");
     }
-    for(i = 0; i < len/2; i++)
-    {
-        if(str[i] != str[len-1-i])
-        {
-            printf("Not Palindrome");
-            return 0;
-        }
-    }
-    printf("Palindrome");
+
     return 0;
 }
